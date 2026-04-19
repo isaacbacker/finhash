@@ -39,13 +39,12 @@ class FINDHasher:
 			use_scipy_dct: If True, use scipy.fft.dctn for the DCT step
 				instead of numpy matrix multiplication. Both produce
 				equivalent results; scipy uses an FFT-based O(N log N)
-				algorithm while matmul is O(N^2). See docs for benchmarks.
+				algorithm while matmul is O(N^2). 
 			fast_mode: If True, skip the box filter preprocessing and
 				resize directly to 64x64 via PIL LANCZOS resampling.
 				This is ~3× faster with equivalent accuracy on the meme
 				dataset (F1≈0.984 for both modes). The box filter may
-				provide additional robustness on heavily compressed or
-				noisy images. See docs/07-fast-mode.md for details.
+				provide additional robustness on noisy images.
 			cache_size: Maximum number of file-path → hash results to
 				cache. Set to 0 (default) to disable caching. When
 				enabled, repeated fromFile() calls with the same path
@@ -145,10 +144,9 @@ class FINDHasher:
 	def _preprocess_fast(self, img):
 		"""Fast pipeline: resize directly to 64×64 via PIL LANCZOS.
 
-		Skips the box filter and intermediate resolution. PIL's LANCZOS
-		resampling provides implicit anti-aliasing during the resize,
-		achieving equivalent smoothing. Benchmarks show identical
-		equivalent accuracy on the meme dataset at ~5× lower cost.
+		Skips the box filter and intermediate resolution. Benchmarks show identical
+		equivalent accuracy on the meme dataset at ~5× lower cost, although may involve
+		a tradeoff in robustness.
 		"""
 		# Resize directly to 64×64 — LANCZOS provides anti-alias smoothing
 		img_64 = img.convert("RGB").resize((64, 64), Image.LANCZOS)
@@ -174,8 +172,7 @@ class FINDHasher:
 		basis used by the original FINd matrix.
 
 		This approach mirrors how the imagehash library computes pHash
-		(using scipy.fftpack.dct), making it a natural choice for
-		optimising FINd's equivalent operation.
+		(using scipy.fftpack.dct).
 		"""
 		return scipy.fft.dctn(A, type=2, norm=None)[1:17, 1:17] / 4.0
 
@@ -189,8 +186,7 @@ class FINDHasher:
 		3. Broadcasting computes all 62,500 inclusion-exclusion queries at once
 
 		This is a fully vectorized extension of the summed area table approach
-		from Step 3 — the algorithm is the same, but the implementation uses
-		numpy array operations instead of Python loops.
+		using numpy array operations instead of Python loops.
 		"""
 		halfColWin = int((colWin + 2) / 2)
 		halfRowWin = int((rowWin + 2) / 2)

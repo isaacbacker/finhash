@@ -4,8 +4,7 @@ A pool of worker processes, each with its own FINDHasher instance (created
 via a pool initializer), processing images via pool.map(). This avoids
 the GIL limitation that makes threading ineffective for CPU-bound work.
 
-The workload is embarrassingly parallel — each image is hashed independently
-with no shared state between images.
+The workload is embarrassingly parallel.
 """
 
 import multiprocessing
@@ -23,8 +22,7 @@ def _init_worker(use_scipy_dct, fast_mode):
 
     The FINDHasher constructor precomputes a 16x64 DCT coefficient matrix.
     By doing this once per process (via the initializer) rather than once
-    per image, we avoid redundant trigonometric computation across the
-    hundreds or thousands of images each worker will process.
+    per image, we avoid redundant computation.
     """
     global _worker_hasher
     _worker_hasher = FINDHasher(
