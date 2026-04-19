@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Profiling output
+*.prof
+*.lprof
+
+# Data (too large for git)
+meme_images/
+das_images/
+*.jpg
+*.jpeg
+*.png
+!tests/data/
+
+# Jupyter
+.ipynb_checkpoints/

@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "finhash"
+version = "0.1.0"
+description = "FINd perceptual image hashing algorithm"
+requires-python = ">=3.9"
+dependencies = [
+    "Pillow",
+    "numpy",
+    "scipy",
+    "imagehash",
+    "fastapi",
+    "uvicorn[standard]",
+    "python-multipart",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "httpx",
+    "line-profiler",
+    "memory-profiler",
+    "matplotlib",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
