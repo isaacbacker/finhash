@@ -64,7 +64,7 @@ Interactive API documentation is available at `http://127.0.0.1:8945/docs`.
 
 | Parameter | Default | Description |
 |---|---|---|
-| `fast_mode` | `False` | Skip box filter, resize directly to 64×64 via LANCZOS. ~3× faster with equivalent accuracy. |
+| `fast_mode` | `False` | Skip box filter, resize directly to 64×64 via LANCZOS. Faster and equivalent accuracy on meme images test set. WARNING: May be less accurrate. |
 | `use_scipy_dct` | `False` | Use scipy's FFT-based DCT instead of numpy matrix multiplication. Slightly faster. |
 | `cache_size` | `0` | LRU cache size for `fromFile()`. Set >0 to cache hashes of previously seen file paths. |
 
