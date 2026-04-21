@@ -1,6 +1,6 @@
 # finhash
 
-A Python library for FINd perceptual image hashing. Computes 256-bit hashes that capture the visual structure of images — similar images produce hashes with small Hamming distance, enabling efficient image matching and clustering at scale.
+A Python library for FINd perceptual image hashing. Computes 256-bit hashes that capture the visual structure of images. Similar images produce hashes with small Hamming distance, enabling efficient image matching and clustering at scale.
 
 ## Installation
 
@@ -64,7 +64,7 @@ Interactive API documentation is available at `http://127.0.0.1:8945/docs`.
 
 | Parameter | Default | Description |
 |---|---|---|
-| `fast_mode` | `False` | Skip box filter, resize directly to 64×64 via LANCZOS. Faster and equivalent accuracy on meme images test set. WARNING: May be less accurrate. |
+| `fast_mode` | `False` | Skip box filter, resize directly to 64×64 via LANCZOS. Faster and equivalent accuracy on meme images test set. WARNING: May be less accurate on certain inputs |
 | `use_scipy_dct` | `False` | Use scipy's FFT-based DCT instead of numpy matrix multiplication. Slightly faster. |
 | `cache_size` | `0` | LRU cache size for `fromFile()`. Set >0 to cache hashes of previously seen file paths. |
 
